@@ -1,0 +1,12 @@
+body{
+    background-image: url(OIP.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+
+}
+header {
+    background-color: #031daf;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="log.css">
+<body>
+    <body>
+        <div class="login-container">
+          <h2>Connexion</h2>
+          <form id="login-form">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+            
+            
+        <button type="submit">Se connecter</button>
+        <button>S'inscrire</button>
+    </form>
+          <div id="error-message" class="error-message"></div>
+        </div>
+      
+         <script>
+    const form = document.getElementById('login-form');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Envoyer les données du formulaire au serveur en utilisant AJAX
+      fetch('login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Rediriger l'utilisateur vers la page d'accueil
+          window.location.href = 'index.php';
+        } else {
+          errorMessage.textContent = data.message;
+        }
+      })
+      .catch(error => {
+        errorMessage.textContent = 'Une erreur s\'est produite. Veuillez réessayer plus tard.';
+      });
+    });
+  </script>
+
+</body>
+</html>
